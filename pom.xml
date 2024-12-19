@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>ignite-app-ext-storage</artifactId>
+	<artifactId>ignite-server-node-ext-storage</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ignite-app-ext-storage</name>
+	<name>ignite-server-node-ext-storage</name>
 	<description>Apache Ignite Read-Through and Write-Through external storage via CacheStoreAdapter</description>
 	<url/>
 	<licenses>
