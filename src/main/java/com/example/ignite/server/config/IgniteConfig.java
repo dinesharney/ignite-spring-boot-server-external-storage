@@ -19,6 +19,8 @@ import org.springframework.context.ApplicationContext;
 
 import javax.cache.configuration.FactoryBuilder;
 
+import static com.example.ignite.server.constants.AppConstants.*;
+
 @Configuration
 public class IgniteConfig {
 
@@ -39,15 +41,14 @@ public class IgniteConfig {
                                  ProductCacheStore productCacheStore, CustomerCacheStore customerCacheStore) {
         Ignite ignite = Ignition.start();
 
-        CacheConfiguration<Long, User> userCacheConfig = new CacheConfiguration<>("UserCache");
+        CacheConfiguration<Long, User> userCacheConfig = new CacheConfiguration<>(USER_CACHE);
         userCacheConfig.setCacheMode(CacheMode.PARTITIONED);
         userCacheConfig.setReadThrough(true);
         userCacheConfig.setWriteThrough(true);
         userCacheConfig.setCacheStoreFactory(FactoryBuilder.factoryOf(UserCacheStore.class));
-        //userCacheConfig.setCacheStoreFactory(new CacheStoreFactory<>(userCacheStore));
         ignite.getOrCreateCache(userCacheConfig);
 
-        CacheConfiguration<Long, Order> orderCacheConfig = new CacheConfiguration<>("OrderCache");
+        CacheConfiguration<Long, Order> orderCacheConfig = new CacheConfiguration<>(ORDER_CACHE);
         orderCacheConfig.setCacheMode(CacheMode.PARTITIONED);
         orderCacheConfig.setReadThrough(true);
         orderCacheConfig.setWriteThrough(true);
@@ -55,7 +56,7 @@ public class IgniteConfig {
 
         ignite.getOrCreateCache(orderCacheConfig);
 
-        CacheConfiguration<Long, Product> productCacheConfig = new CacheConfiguration<>("ProductCache");
+        CacheConfiguration<Long, Product> productCacheConfig = new CacheConfiguration<>(PRODUCT_CACHE);
         productCacheConfig.setCacheMode(CacheMode.PARTITIONED);
         productCacheConfig.setReadThrough(true);
         productCacheConfig.setWriteThrough(true);
@@ -63,7 +64,7 @@ public class IgniteConfig {
 
         ignite.getOrCreateCache(productCacheConfig);
 
-        CacheConfiguration<Long, Customer> customerCacheConfig = new CacheConfiguration<>("CustomerCache");
+        CacheConfiguration<Long, Customer> customerCacheConfig = new CacheConfiguration<>(CUSTOMER_CACHE);
         customerCacheConfig.setCacheMode(CacheMode.PARTITIONED);
         customerCacheConfig.setReadThrough(true);
         customerCacheConfig.setWriteThrough(true);
