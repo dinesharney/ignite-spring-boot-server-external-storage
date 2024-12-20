@@ -20,7 +20,7 @@ import org.springframework.context.ApplicationContext;
 import javax.cache.configuration.FactoryBuilder;
 
 @Configuration
-public class IgniteConfiguration {
+public class IgniteConfig {
 
     @Autowired
     ApplicationContext applicationContext;
