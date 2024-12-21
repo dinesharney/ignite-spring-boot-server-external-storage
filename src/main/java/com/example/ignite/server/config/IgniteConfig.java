@@ -8,6 +8,7 @@ import com.example.ignite.server.entity.Customer;
 import com.example.ignite.server.entity.Order;
 import com.example.ignite.server.entity.Product;
 import com.example.ignite.server.entity.User;
+import com.example.ignite.server.interceptor.UserCacheInterceptor;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.cache.CacheMode;
@@ -26,6 +27,9 @@ public class IgniteConfig {
 
     @Autowired
     ApplicationContext applicationContext;
+
+    @Autowired
+    UserCacheInterceptor<Long, User>  userCacheInterceptor;
 
     /**
      * Configure Ignite instance and cache with Read-Through and Write-Through enabled.
@@ -46,6 +50,7 @@ public class IgniteConfig {
         userCacheConfig.setReadThrough(true);
         userCacheConfig.setWriteThrough(true);
         userCacheConfig.setCacheStoreFactory(FactoryBuilder.factoryOf(UserCacheStore.class));
+        userCacheConfig.setInterceptor(userCacheInterceptor);
         ignite.getOrCreateCache(userCacheConfig);
 
         CacheConfiguration<Long, Order> orderCacheConfig = new CacheConfiguration<>(ORDER_CACHE);
