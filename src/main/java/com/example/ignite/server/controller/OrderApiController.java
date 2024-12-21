@@ -1,9 +1,9 @@
 package com.example.ignite.server.controller;
 
-import com.example.ignite.server.dto.CustomerDTO;
-import com.example.ignite.server.dto.OrderDTO;
-import com.example.ignite.server.dto.ProductDTO;
-import com.example.ignite.server.dto.UserDTO;
+import com.example.common.dto.CustomerDTO;
+import com.example.common.dto.OrderDTO;
+import com.example.common.dto.ProductDTO;
+import com.example.common.dto.UserDTO;
 import com.example.ignite.server.entity.Customer;
 import com.example.ignite.server.entity.Order;
 import com.example.ignite.server.entity.Product;
