@@ -1,7 +1,7 @@
 package com.example.ignite.server.interceptor;
 
+import com.example.ignite.server.entity.User;
 import org.apache.ignite.cache.CacheInterceptorAdapter;
-import org.apache.ignite.cache.CacheInterceptorEntry;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Component;
 
