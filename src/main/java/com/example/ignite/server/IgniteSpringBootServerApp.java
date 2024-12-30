@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IgniteServerNodeApp {
+public class IgniteSpringBootServerApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IgniteServerNodeApp.class, args
+		SpringApplication.run(IgniteSpringBootServerApp.class, args
 		);
 	}
 }
