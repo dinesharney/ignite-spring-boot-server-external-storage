@@ -57,7 +57,7 @@ A sample Spring Boot application demonstrating **Apache Ignite** as a distribute
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-org/ignite-spring-boot-server-external-storage.git
+   git clone https://github.com/dinesharney/ignite-spring-boot-server-external-storage
    cd ignite-spring-boot-server-external-storage
 
 ### 2. Build the App
