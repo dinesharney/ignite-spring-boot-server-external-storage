@@ -1,14 +1,12 @@
 package com.example.ignite.server.controller;
 
-import com.example.common.dto.CustomerDTO;
-import com.example.ignite.server.entity.Customer;
 import com.example.ignite.server.service.AdminService;
-import com.example.ignite.server.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * REST Controller to handle Cache Admin  requests to manage issue related to Cache

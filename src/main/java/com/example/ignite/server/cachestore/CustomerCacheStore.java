@@ -1,8 +1,8 @@
 package com.example.ignite.server.cachestore;
 
-import com.example.ignite.server.repository.CustomerRepository;
 import com.example.ignite.server.context.SpringContext;
 import com.example.ignite.server.entity.Customer;
+import com.example.ignite.server.repository.CustomerRepository;
 import org.apache.ignite.cache.store.CacheStoreAdapter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
