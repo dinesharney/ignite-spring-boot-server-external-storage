@@ -40,7 +40,6 @@ public class ProductApiController {
 
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts() {
-
         return ResponseEntity.ok(productService.getAllProducts());
     }
 

@@ -40,7 +40,6 @@ public class OrderApiController {
 
     @GetMapping("/orders")
     public ResponseEntity<List<Order>> getAllOrders() {
-
         return ResponseEntity.ok(orderService.getAllOrders());
     }
 }
