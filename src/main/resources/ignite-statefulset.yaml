@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ignite
+spec:
+  serviceName: "ignite"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ignite
+  template:
+    metadata:
+      labels:
+        app: ignite
+    spec:
+      containers:
+        - name: ignite
+          image: apacheignite/ignite
+          ports:
+            - containerPort: 47500
+            - containerPort: 47100
+            - containerPort: 10800
+          env:
+            - name: IGNITE_DISCOVERY_SPI
+              value: |
+                <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+                  <property name="ipFinder">
+                    <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
+                      <property name="namespace" value="default"/>
+                      <property name="serviceName" value="ignite"/>
+                    </bean>
+                  </property>
+                </bean>

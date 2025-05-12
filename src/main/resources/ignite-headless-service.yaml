@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ignite
+  labels:
+    app: ignite
+spec:
+  clusterIP: None   # Headless service
+  selector:
+    app: ignite
+  ports:
+    - port: 47500   # Discovery
+      name: discovery
+    - port: 47100   # Communication
+      name: communication
+    - port: 10800   # JDBC, ODBC, thin client
+      name: client

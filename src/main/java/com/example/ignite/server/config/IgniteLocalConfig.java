@@ -28,7 +28,7 @@ import static com.example.ignite.server.constants.AppConstants.*;
  */
 @Configuration
 @Profile("default")
-public class IgniteConfig {
+public class IgniteLocalConfig {
 
     @Autowired
     ApplicationContext applicationContext;

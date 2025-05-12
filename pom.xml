@@ -57,6 +57,12 @@
 			<artifactId>ignite-spring</artifactId>
 			<version>2.16.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.ignite</groupId>
+			<artifactId>ignite-kubernetes</artifactId>
+			<version>2.16.0</version> <!-- Or your Ignite version -->
+		</dependency>
+
 		<!-- MapStruct -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
