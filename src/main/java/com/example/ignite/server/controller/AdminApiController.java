@@ -3,10 +3,9 @@ package com.example.ignite.server.controller;
 import com.example.ignite.server.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * REST Controller to handle Cache Admin  requests to manage issue related to Cache
@@ -31,5 +30,10 @@ public class AdminApiController {
     public ResponseEntity<String> clearCache(@RequestParam String cache) {
         adminService.clearCache(cache);
         return ResponseEntity.ok(cache);
+    }
+
+    @GetMapping("/all/{name}")
+    public ResponseEntity<List<Object>> getAll(@PathVariable String name) {
+        return ResponseEntity.ok(adminService.getAll(name));
     }
 }

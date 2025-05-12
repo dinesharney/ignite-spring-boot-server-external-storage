@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Profile;
 
 import javax.cache.configuration.FactoryBuilder;
 
@@ -26,6 +27,7 @@ import static com.example.ignite.server.constants.AppConstants.*;
  * Configuration class for setting up Apache Ignite with cache configurations for different entities.
  */
 @Configuration
+@Profile("default")
 public class IgniteConfig {
 
     @Autowired

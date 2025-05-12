@@ -38,15 +38,19 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         IgniteCache<Long, User> userCache = ignite.cache("UserCache");
-        userService.getAllUsers().forEach(user -> userCache.put(user.getId(), user));
+        userCache.loadCache(null);
+//        userService.getAllUsers().forEach(user -> userCache.put(user.getId(), user));
 
         IgniteCache<Long, Order> orderCache = ignite.cache("OrderCache");
-        orderService.getAllOrders().forEach(order -> orderCache.put(order.getId(), order));
+        orderCache.loadCache(null);
+        //orderService.getAllOrders().forEach(order -> orderCache.put(order.getId(), order));
 
         IgniteCache<Long, Product> productCache = ignite.cache("ProductCache");
-        productService.getAllProducts().forEach(product -> productCache.put(product.getId(), product));
+        productCache.loadCache(null);
+        //productService.getAllProducts().forEach(product -> productCache.put(product.getId(), product));
 
         IgniteCache<Long, Customer> customerCache = ignite.cache("CustomerCache");
-        customerService.getAllCustomers().forEach(customer -> customerCache.put(customer.getId(), customer));
+        customerCache.loadCache(null);
+        //customerService.getAllCustomers().forEach(customer -> customerCache.put(customer.getId(), customer));
     }
 }
