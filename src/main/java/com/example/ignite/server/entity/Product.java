@@ -15,8 +15,8 @@ public class Product {
     private Long id;
     private String name;
     private Double price;
+    private String detail;
 
-    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -39,5 +39,13 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 }

@@ -4,10 +4,12 @@ import com.example.common.dto.CustomerDTO;
 import com.example.common.dto.OrderDTO;
 import com.example.common.dto.ProductDTO;
 import com.example.common.dto.UserDTO;
+import com.example.ignite.server.datasource.UserDataSource;
 import com.example.ignite.server.entity.Customer;
 import com.example.ignite.server.entity.Order;
 import com.example.ignite.server.entity.Product;
 import com.example.ignite.server.entity.User;
+import com.example.ignite.server.factory.UserDataSourceFactory;
 import com.example.ignite.server.service.CustomerService;
 import com.example.ignite.server.service.OrderService;
 import com.example.ignite.server.service.ProductService;
@@ -22,15 +24,19 @@ import java.util.List;
         * REST Controller to handle requests.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class UserApiController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user")
-    public ResponseEntity<User> getUsers(@RequestParam Long id) {
-        return ResponseEntity.ok(userService.getUserById(id));
+    @Autowired
+    UserDataSourceFactory factory;
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getUsers(@PathVariable Long id, @RequestParam(defaultValue = "cache") String source) {
+        UserDataSource dataSource = factory.getSource(source);
+        return ResponseEntity.ok(dataSource.getUserById(id));
     }
 
     // User Endpoints
@@ -40,6 +46,7 @@ public class UserApiController {
         user.setId(userDTO.getId());
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
+        user.setDetail(userDTO.getDetail());
         return ResponseEntity.ok(userService.saveUser(user));
     }
 
