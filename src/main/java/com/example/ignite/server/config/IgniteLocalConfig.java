@@ -20,6 +20,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Profile;
 
 import javax.cache.configuration.FactoryBuilder;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
+
+import java.util.UUID;
 
 import static com.example.ignite.server.constants.AppConstants.*;
 
@@ -34,7 +38,7 @@ public class IgniteLocalConfig {
     ApplicationContext applicationContext;
 
     @Autowired
-    UserCacheInterceptor<Long, User>  userCacheInterceptor;
+    UserCacheInterceptor<UUID, User>  userCacheInterceptor;
 
     /**
      * Initializes the Apache Ignite instance and configures caches for User, Order, Product, and Customer entities.
@@ -53,16 +57,17 @@ public class IgniteLocalConfig {
         Ignite ignite = Ignition.start();
 
         // User cache configuration
-        CacheConfiguration<Long, User> userCacheConfig = new CacheConfiguration<>(USER_CACHE);
+        CacheConfiguration<UUID, User> userCacheConfig = new CacheConfiguration<>(USER_CACHE);
         userCacheConfig.setCacheMode(CacheMode.PARTITIONED);
         userCacheConfig.setReadThrough(true);
         userCacheConfig.setWriteThrough(true);
         userCacheConfig.setCacheStoreFactory(FactoryBuilder.factoryOf(UserCacheStore.class));
+        userCacheConfig.setExpiryPolicyFactory(CreatedExpiryPolicy.factoryOf(Duration.FIVE_MINUTES));
         userCacheConfig.setInterceptor(userCacheInterceptor);
         ignite.getOrCreateCache(userCacheConfig);
 
         // Order cache configuration
-        CacheConfiguration<Long, Order> orderCacheConfig = new CacheConfiguration<>(ORDER_CACHE);
+        CacheConfiguration<UUID, Order> orderCacheConfig = new CacheConfiguration<>(ORDER_CACHE);
         orderCacheConfig.setCacheMode(CacheMode.PARTITIONED);
         orderCacheConfig.setReadThrough(true);
         orderCacheConfig.setWriteThrough(true);
@@ -70,7 +75,7 @@ public class IgniteLocalConfig {
         ignite.getOrCreateCache(orderCacheConfig);
 
         // Product cache configuration
-        CacheConfiguration<Long, Product> productCacheConfig = new CacheConfiguration<>(PRODUCT_CACHE);
+        CacheConfiguration<UUID, Product> productCacheConfig = new CacheConfiguration<>(PRODUCT_CACHE);
         productCacheConfig.setCacheMode(CacheMode.PARTITIONED);
         productCacheConfig.setReadThrough(true);
         productCacheConfig.setWriteThrough(true);
@@ -78,7 +83,7 @@ public class IgniteLocalConfig {
         ignite.getOrCreateCache(productCacheConfig);
 
         // Customer cache configuration
-        CacheConfiguration<Long, Customer> customerCacheConfig = new CacheConfiguration<>(CUSTOMER_CACHE);
+        CacheConfiguration<UUID, Customer> customerCacheConfig = new CacheConfiguration<>(CUSTOMER_CACHE);
         customerCacheConfig.setCacheMode(CacheMode.PARTITIONED);
         customerCacheConfig.setReadThrough(true);
         customerCacheConfig.setWriteThrough(true);

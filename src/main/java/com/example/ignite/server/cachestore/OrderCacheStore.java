@@ -7,29 +7,31 @@ import org.apache.ignite.cache.store.CacheStoreAdapter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 /**
  * Ignite CacheStore implementation for handling Order data persistence.
  */
 @Component
-public class OrderCacheStore extends CacheStoreAdapter<Long, Order> {
+public class OrderCacheStore extends CacheStoreAdapter<UUID, Order> {
 
-    private JpaRepository<Order, Long> getRepository() {
+    private JpaRepository<Order, UUID> getRepository() {
         return SpringContext.getBean(OrderRepository.class);
     }
 
     @Override
-    public Order load(Long key) {
+    public Order load(UUID key) {
         return getRepository().findById(key).orElse(null);
     }
 
     @Override
-    public void write(javax.cache.Cache.Entry<? extends Long, ? extends Order> entry) {
+    public void write(javax.cache.Cache.Entry<? extends UUID, ? extends Order> entry) {
         getRepository().save(entry.getValue());
     }
 
     @Override
     public void delete(Object key) {
-        getRepository().deleteById((Long) key);
+        getRepository().deleteById((UUID) key);
     }
 }
 

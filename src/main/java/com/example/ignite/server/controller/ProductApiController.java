@@ -1,9 +1,6 @@
 package com.example.ignite.server.controller;
 
-import com.example.common.dto.CustomerDTO;
-import com.example.common.dto.OrderDTO;
-import com.example.common.dto.ProductDTO;
-import com.example.common.dto.UserDTO;
+import com.example.common.dto.*;
 import com.example.ignite.server.entity.Customer;
 import com.example.ignite.server.entity.Order;
 import com.example.ignite.server.entity.Product;
@@ -17,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
         * REST Controller to handle requests.
@@ -30,12 +28,16 @@ public class ProductApiController {
 
     // Product Endpoints
     @PostMapping("/product")
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ResponseDTO> createProduct(@RequestBody ProductDTO productDTO) {
         Product product = new Product();
-        product.setId(productDTO.getId());
+        product.setId(UUID.randomUUID());
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
-        return ResponseEntity.ok(productService.saveProduct(product));
+        ResponseDTO response = new ResponseDTO();
+        UUID id = productService.saveProduct(product).getId();
+        response.setId(id);
+        response.setSuccess(true);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/products")

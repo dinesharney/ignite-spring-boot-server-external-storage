@@ -1,6 +1,6 @@
 -- Table for CustomerDTO
 CREATE TABLE IF NOT EXISTS customers (
-    id BIGINT PRIMARY KEY,
+    id CHAR(36) PRIMARY KEY,  -- UUID stored as a 36-character string
     name VARCHAR(255),
     email VARCHAR(255),
     detail TEXT
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS customers (
 
 -- Table for OrderDTO
 CREATE TABLE IF NOT EXISTS orders (
-    id BIGINT PRIMARY KEY,
+    id CHAR(36) PRIMARY KEY,  -- UUID stored as a 36-character string
     product VARCHAR(255),
     price DOUBLE,
     detail TEXT
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS orders (
 
 -- Table for ProductDTO
 CREATE TABLE IF NOT EXISTS products (
-    id BIGINT PRIMARY KEY,
+    id CHAR(36) PRIMARY KEY,  -- UUID stored as a 36-character string
     name VARCHAR(255),
     price DOUBLE,
     detail TEXT
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS products (
 
 -- Table for UserDTO
 CREATE TABLE IF NOT EXISTS users (
-    id BIGINT PRIMARY KEY,
+    id CHAR(36) PRIMARY KEY,  -- UUID stored as a 36-character string
     name VARCHAR(255),
     email VARCHAR(255),
     detail TEXT

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Service to handle business logic for Order entities.
@@ -25,17 +26,17 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Order getOrderById(Long id) {
+    public Order getOrderById(UUID id) {
         return orderRepository.findById(id).orElse(null);
     }
 
     public Order saveOrder(Order order) {
-        IgniteCache<Long, Order> cache = ignite.getOrCreateCache("OrderCache");
+        IgniteCache<UUID, Order> cache = ignite.getOrCreateCache("OrderCache");
         cache.put(order.getId(),order);
         return order;
     }
 
-    public Order updateOrder(Long id, Order updatedOrder) {
+    public Order updateOrder(UUID id, Order updatedOrder) {
         if (orderRepository.existsById(id)) {
             updatedOrder.setId(id);
             return orderRepository.save(updatedOrder);
@@ -43,7 +44,7 @@ public class OrderService {
         return null;
     }
 
-    public void deleteOrder(Long id) {
+    public void deleteOrder(UUID id) {
         orderRepository.deleteById(id);
     }
 }

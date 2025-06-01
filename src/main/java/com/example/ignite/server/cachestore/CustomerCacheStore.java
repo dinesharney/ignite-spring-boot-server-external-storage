@@ -7,29 +7,31 @@ import org.apache.ignite.cache.store.CacheStoreAdapter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 /**
  * Ignite CacheStore implementation for handling Customer data persistence.
  */
 @Component
-public class CustomerCacheStore extends CacheStoreAdapter<Long, Customer> {
+public class CustomerCacheStore extends CacheStoreAdapter<UUID, Customer> {
 
-    private JpaRepository<Customer, Long> getRepository() {
+    private JpaRepository<Customer, UUID> getRepository() {
         return SpringContext.getBean(CustomerRepository.class);
     }
 
     @Override
-    public Customer load(Long key) {
+    public Customer load(UUID key) {
         return getRepository().findById(key).orElse(null);
     }
 
     @Override
-    public void write(javax.cache.Cache.Entry<? extends Long, ? extends Customer> entry) {
+    public void write(javax.cache.Cache.Entry<? extends UUID, ? extends Customer> entry) {
         getRepository().save(entry.getValue());
     }
 
     @Override
     public void delete(Object key) {
-        getRepository().deleteById((Long) key);
+        getRepository().deleteById((UUID) key);
     }
 }
 

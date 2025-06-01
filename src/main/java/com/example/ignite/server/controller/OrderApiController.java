@@ -1,9 +1,6 @@
 package com.example.ignite.server.controller;
 
-import com.example.common.dto.CustomerDTO;
-import com.example.common.dto.OrderDTO;
-import com.example.common.dto.ProductDTO;
-import com.example.common.dto.UserDTO;
+import com.example.common.dto.*;
 import com.example.ignite.server.entity.Customer;
 import com.example.ignite.server.entity.Order;
 import com.example.ignite.server.entity.Product;
@@ -17,12 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
         * REST Controller to handle requests.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class OrderApiController {
 
     @Autowired
@@ -30,12 +28,16 @@ public class OrderApiController {
 
     // Order Endpoints
     @PostMapping("/order")
-    public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<ResponseDTO> createOrder(@RequestBody OrderDTO orderDTO) {
         Order order = new Order();
-        order.setId(orderDTO.getId());
+        order.setId(UUID.randomUUID());
         order.setProduct(orderDTO.getProduct());
         order.setPrice(orderDTO.getPrice());
-        return ResponseEntity.ok(orderService.saveOrder(order));
+        ResponseDTO response = new ResponseDTO();
+        UUID id = orderService.saveOrder(order).getId();
+        response.setId(id);
+        response.setSuccess(true);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/orders")

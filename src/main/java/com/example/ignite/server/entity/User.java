@@ -1,25 +1,33 @@
 package com.example.ignite.server.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
+import org.springframework.data.domain.Persistable;
+
+import java.sql.Types;
+import java.util.UUID;
 
 /**
  * Entity representing a User.
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Persistable<UUID>  {
 
     @Id
-    private Long id;
+    @JdbcTypeCode(Types.VARCHAR)
+    @Column(columnDefinition = "CHAR(36)")
+    private UUID id;
     private String name;
     private String email;
     private String detail;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -45,6 +53,11 @@ public class User {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    @Override
+    public boolean isNew() {
+        return true;
     }
 }
 

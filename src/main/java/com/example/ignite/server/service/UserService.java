@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.cache.Cache;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -40,7 +41,7 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        IgniteCache<Long, User> cache = ignite.getOrCreateCache(USER_CACHE);
+        IgniteCache<UUID, User> cache = ignite.getOrCreateCache(USER_CACHE);
         cache.put(user.getId(),user);
         return user;
     }

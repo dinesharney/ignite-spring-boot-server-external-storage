@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
+
 /**
  * Service to handle business logic for Customer entities.
  */
@@ -19,7 +21,7 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer getCustomerById(Long id) {
+    public Customer getCustomerById(UUID id) {
         return customerRepository.findById(id).orElse(null);
     }
 
@@ -27,7 +29,7 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer updateCustomer(Long id, Customer updatedCustomer) {
+    public Customer updateCustomer(UUID id, Customer updatedCustomer) {
         if (customerRepository.existsById(id)) {
             updatedCustomer.setId(id);
             return customerRepository.save(updatedCustomer);
@@ -35,7 +37,7 @@ public class CustomerService {
         return null;
     }
 
-    public void deleteCustomer(Long id) {
+    public void deleteCustomer(UUID id) {
         customerRepository.deleteById(id);
     }
 }

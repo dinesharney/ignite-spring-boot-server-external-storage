@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Service to handle business logic for Product entities.
@@ -20,7 +21,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProductById(Long id) {
+    public Product getProductById(UUID id) {
         return productRepository.findById(id).orElse(null);
     }
 
@@ -28,7 +29,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product updateProduct(Long id, Product updatedProduct) {
+    public Product updateProduct(UUID id, Product updatedProduct) {
         if (productRepository.existsById(id)) {
             updatedProduct.setId(id);
             return productRepository.save(updatedProduct);
@@ -36,7 +37,7 @@ public class ProductService {
         return null;
     }
 
-    public void deleteProduct(Long id) {
+    public void deleteProduct(UUID id) {
         productRepository.deleteById(id);
     }
 }
